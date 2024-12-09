@@ -1,7 +1,7 @@
 ***Flag:***
 picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_c79a21}
 <br>
-***Appraoching the challenge:***
+***Appraoching the challenge:*** <br>
 The given JAVA code had a print statement at the end with a password 
 (jU5t_a_sna_3lpm12g94c_u_4_m7ra41) but it was not the flag. <br>
 After reading the code, I could conclude that the flag shall be of 32 characters length.
