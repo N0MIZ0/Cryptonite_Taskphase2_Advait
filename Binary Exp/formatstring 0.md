@@ -2,7 +2,7 @@
 <br>
 picoCTF{7h3_cu570m3r_15_n3v3r_SEGFAULT_63191ce6}
 <br>
-***Approaching the challenge:***
+***Approaching the challenge:*** <br>
 Connected the shell to ``` c mimas.picoctf.net 64891 ``` and tried lurking around different types of burgers. <br>
 The output was same for all of them except for one, *Gr%114d_Cheese*
 The source was a C file, so I opened it and check for what could be done.  <br>
