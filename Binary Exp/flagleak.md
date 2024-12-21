@@ -112,6 +112,6 @@ Here's a story -
 CTF{L34k1ng_Fl4g_0ff_St4ck_11a2b52a}
 ```
 <br>
-Hence when the input is stored in such a format string, we use **%number$s** to find out which stack has the flag or desired output. It basically replicates
-**%p %p %p %p %p ...... %s** <br>
+Hence when the input is stored in such a format string, we use "%number$s" to find out which stack has the flag or desired output. It basically replicates
+"%p %p %p %p %p ...... %s" <br>
 The "%p" prints the memory address from the stack and the %s converts is to a string to print.
