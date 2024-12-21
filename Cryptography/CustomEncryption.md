@@ -1,5 +1,5 @@
 ***Flag:*** <br>
-flag
+picoCTF{custom_d2cr0pt6d_49fbee5b}
 <br>
 ***Approaching the challenge:*** <br>
 Encryption code:
@@ -114,46 +114,51 @@ print("Decrypted message:", decrypted_message)
 ```
 But this code was not working and had some error in it.  So instead of me modifying anything, I tried the exact code suggested by AI:
 ```
+def compute_shared_key(base, private_key, prime):
+    
+    return pow(base, private_key) % prime
 
-def compute_shared_key(a, b, g, p):
+def reverse_encryption(cipher, shared_key):
    
-    u = pow(g, a, p) 
-    v = pow(g, b, p)  
-
-   
-    shared_key = pow(v, a, p)  
-    return shared_key
-
-
-def decrypt(cipher, a, b, g, p, text_key):
-   
-    shared_key = compute_shared_key(a, b, g, p)
-    print(f"Shared key: {shared_key}")
-
-
-    original_ascii = [num // (shared_key * 311) for num in cipher]
-
-   
-    semi_cipher = ''.join(chr(num) for num in original_ascii)
-
-  
     decrypted_text = ""
-    key_length = len(text_key)
-    for i, char in enumerate(semi_cipher[::-1]): 
-        key_char = text_key[i % key_length]
-        original_char = chr(ord(char) ^ ord(key_char))  
-        decrypted_text += original_char
-
+    for value in cipher:
+        decrypted_value = value // (shared_key * 311)
+        decrypted_text += chr(decrypted_value)
     return decrypted_text
 
-cipher = [] #input as per the file
-a = 90  
-b = 26
-g = 31  
-p = 97  
-text_key = "trudeau"  
+def xor_reverse_decryption(encrypted_text, key):
+  
+    decrypted_text = ""
+    key_length = len(key)
+    for index, char in enumerate(encrypted_text):
+        key_char = key[index % key_length]
+        decrypted_char = chr(ord(char) ^ ord(key_char))
+        decrypted_text += decrypted_char
+    return decrypted_text
 
-decrypted_message = decrypt(cipher, a, b, g, p, text_key)
-print(f"Decrypted message: {decrypted_message}")
+
+a = 90
+b = 26
+prime_p = 97
+base_g = 31
+
+
+cipher_text = [61578, 109472, 437888, 6842, 0, 20526, 129998, 526834, 478940, 287364, 0, 567886, 143682, 34210, 465256, 0, 150524, 588412, 6842, 424204, 164208, 184734, 41052, 41052, 116314, 41052, 177892, 348942, 218944, 335258, 177892, 47894, 82104, 116314] #The one I got in the file
+
+
+u_value = compute_shared_key(base_g, a, prime_p)
+v_value = compute_shared_key(base_g, b, prime_p)
+shared_key = compute_shared_key(v_value, a, prime_p)
+
+
+decrypted_with_shared_key = reverse_encryption(cipher_text, shared_key)
+
+
+original_message = xor_reverse_decryption(decrypted_with_shared_key, "trudeau")
+original_message = original_message[::-1]
+
+
+print(original_message)
 
 ```
+Hence finally got the flag.
