@@ -50,6 +50,7 @@ int main(int argc, char **argv){
 }
 ```
 So basically to inout, they have used **gets** which can allow a larger input than the size declared to **buf1** which is 100. Hence by doing so we initiate a
-segmentation error resulting in the flag.
+segmentation error resulting in the flag. <br>
+Segmentation errors are specific types of errors where the program tries to access/locate memory in an invalid way.
 <br> ***Proofs:*** <br>
 ![{FD0B109A-51E1-4DE4-8A17-7AA2625C926B}](https://github.com/user-attachments/assets/19e09f5b-67c9-4d42-a0fd-222e3700c833)
