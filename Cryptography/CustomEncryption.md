@@ -9,21 +9,21 @@ import sys
 
 
 def generator(g, x, p):
-    return pow(g, x) % p
+    return pow(g, x) % p <-- key is generated
 
 
 def encrypt(plaintext, key):
     cipher = []
     for char in plaintext:
         cipher.append(((ord(char) * key*311)))
-    return cipher
+    return cipher <-- A cipher list is formed
 
 
-def is_prime(p):
+def is_prime(p): <-- Checks prime
     v = 0
     for i in range(2, p + 1):
         if p % i == 0:
-            v = v + 1
+            v = v + 1 
     if v > 1:
         return False
     else:
@@ -33,14 +33,14 @@ def is_prime(p):
 def dynamic_xor_encrypt(plaintext, text_key):
     cipher_text = ""
     key_length = len(text_key)
-    for i, char in enumerate(plaintext[::-1]):
+    for i, char in enumerate(plaintext[::-1]):  <-- Plain text is reversed
         key_char = text_key[i % key_length]
-        encrypted_char = chr(ord(char) ^ ord(key_char))
+        encrypted_char = chr(ord(char) ^ ord(key_char)) <-- XORed with the corresponding text_key
         cipher_text += encrypted_char
-    return cipher_text
+    return cipher_text <-- new list of XORed charcs
 
 
-def test(plain_text, text_key):
+def test(plain_text, text_key): <-- The main function where everthing comes together
     p = 97
     g = 31
     if not is_prime(p) and not is_prime(g):
@@ -54,14 +54,14 @@ def test(plain_text, text_key):
     v = generator(g, b, p)
     key = generator(v, a, p)
     b_key = generator(u, b, p)
-    shared_key = None
+    shared_key = None <-- shared key has been initialized
     if key == b_key:
         shared_key = key
     else:
         print("Invalid key")
         return
     semi_cipher = dynamic_xor_encrypt(plain_text, text_key)
-    cipher = encrypt(semi_cipher, shared_key)
+    cipher = encrypt(semi_cipher, shared_key) <--ascii*311*key
     print(f'cipher is: {cipher}')
 
 
@@ -122,7 +122,7 @@ def reverse_encryption(cipher, shared_key):
    
     decrypted_text = ""
     for value in cipher:
-        decrypted_value = value // (shared_key * 311)
+        decrypted_value = value  #(shared_key * 311)
         decrypted_text += chr(decrypted_value)
     return decrypted_text
 
